@@ -1,0 +1,35 @@
+[user]
+	name = Gregori Kanatzidis
+  email = kanatzidisg@gmail.com
+[alias]
+      lc = log ORIG_HEAD.. --stat --no-merges
+      cp = cherry-pick
+      ci = commit
+      st = status
+      co = checkout
+      rb = rebase
+      rba = rebase --abort
+      rbc = rebase --continue
+      log = log --decorate
+      lol = log --graph --decorate --pretty=oneline --abbrev-commit
+      lola = log --all  --graph --decorate --pretty=oneline --abbrev-commit
+      svnci = svn dcommit
+      svnup = svn fetch
+      svnst = log trunk..
+      br = !sh -c 'git branch --color $* | grep -v " z-"' -
+      diffn = diff --no-ext-diff
+      resolve = !git-resolve
+      wtf = !git-wtf
+[color]
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+[merge]
+  tool = diff
+[core]
+  whitespace = -trailing-space    
+  autocrlf = input
+  editor = /usr/bin/vim
+[push]
+  default = matching
