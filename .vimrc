@@ -174,3 +174,9 @@ filetype plugin indent on
 autocmd FileType ruby set expandtab
 autocmd FileType ruby set tabstop=2
 autocmd FileType ruby set shiftwidth=2
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Display 80 character threshold
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command Threshold let &colorcolumn=join(range(81,999),",") | highlight ColorColumn ctermbg=124 guibg=LightRed
+command Nothreshold let &colorcolumn=0
