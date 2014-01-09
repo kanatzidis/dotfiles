@@ -47,7 +47,7 @@ function precmd() {
 
 ################################################################### env
 EDITOR=vim
-PATH=~/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
+PATH=~/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
 if [ -z "$HOSTNAME" ]; then
     HOSTNAME=`hostname`
 fi
@@ -68,6 +68,10 @@ elif [ "$TERM" != "dumb" ]; then
 fi
 
 ################################################################### commands
+alias chrun='ps aux | grep'
+alias mysql='/usr/local/mysql/bin/mysql'
+alias mysqld='/usr/local/mysql/bin/mysqld &'
+alias ack='nocorrect ack'
 alias lal='ls -al'
 alias ll='ls -l'
 alias la='ls -A'
