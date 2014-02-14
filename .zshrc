@@ -47,7 +47,7 @@ function precmd() {
 
 ################################################################### env
 EDITOR=vim
-PATH=~/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
+PATH=~/bin:~/devtools/arcanist/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
 if [ -z "$HOSTNAME" ]; then
     HOSTNAME=`hostname`
 fi
