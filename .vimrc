@@ -180,3 +180,8 @@ autocmd FileType ruby set shiftwidth=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command Threshold let &colorcolumn=join(range(81,999),",") | highlight ColorColumn ctermbg=124 guibg=LightRed
 command Nothreshold let &colorcolumn=0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set soft line navigation
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
