@@ -89,6 +89,12 @@ fi
 bindkey '^[v' edit_command_line
 bindkey '^[!' edit_command_output
 
+function fuck() {
+  if killall -9 "$2"; then
+    echo ; echo " (╯°□°）╯︵$(echo "$2"|./.flip)"; echo
+  fi
+}
+
 ################################################################### utilities
 function freq() {
     sort $* | uniq -c | sort -rn;
@@ -219,3 +225,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
