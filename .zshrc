@@ -91,7 +91,7 @@ bindkey '^[!' edit_command_output
 
 function fuck() {
   if killall -9 "$2"; then
-    echo ; echo " (╯°□°）╯︵$(echo "$2"|./.flip)"; echo
+    echo ; echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"; echo
   fi
 }
 
