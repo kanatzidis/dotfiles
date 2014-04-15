@@ -90,9 +90,13 @@ bindkey '^[v' edit_command_line
 bindkey '^[!' edit_command_output
 
 function fuck() {
+  echo
   if killall -9 "$2"; then
-    echo ; echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"; echo
+    echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
+  else
+    echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
   fi
+  echo
 }
 
 ################################################################### utilities
