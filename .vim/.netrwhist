@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/kanatzidis/Documents/SpanDeX/Development/Spandex/controllers/main'
-let g:netrw_dirhist_2='/Users/kanatzidis/Documents/SpanDeX/Development/Spandex/lib/latex-parser'
-let g:netrw_dirhist_3='/Users/kanatzidis/Downloads/lame-3.99.5/macosx'
-let g:netrw_dirhist_4='/Users/kanatzidis/Downloads/lame-3.99.5/libmp3lame'
-let g:netrw_dirhist_5='/Users/kanatzidis/RoR-DineInTime/dineintime/app/models'
-let g:netrw_dirhist_6='/Users/kanatzidis/DineInTime/wp-content/themes/dineintime'
-let g:netrw_dirhist_7='/Users/kanatzidis/.heroku'
