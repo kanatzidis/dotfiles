@@ -16,10 +16,11 @@
       svnci = svn dcommit
       svnup = svn fetch
       svnst = log trunk..
-      br = !sh -c 'git branch --color $* | grep -v " z-"' -
+      br = !sh -c 'git branch -a --color $* | grep -v " z-"' -
       diffn = diff --no-ext-diff
       resolve = !git-resolve
       wtf = !git-wtf
+      delwf = clean  -d  -fx ""
 [color]
   ui = auto
   diff = auto
