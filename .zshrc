@@ -28,7 +28,7 @@ findup() {
 }
 
 function precmd() {
-    PROMPT=$'%{\e[0;32m%}%n@%m [%d]'
+    PROMPT=$'%{\e[0;32m%}%n@arezou [%d]'
     RPS1=$'%{\e[0;33m%}%B(%D{%m-%d %H:%M})%b%{\e[0m%}'
     
     local _git _branch
