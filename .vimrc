@@ -97,6 +97,9 @@ noremap <F8> :%s/[‘’]/'/g<Enter>:%s/[“”]/"/g<Enter>:%s/^\s*[0-9]*//g<Ent
 " modern GUI editors)
 set backspace=2
 
+" Easier escape key
+ino jj <esc>
+
 "color peachpuff
 
 " Buffer explorer
@@ -160,10 +163,10 @@ au BufNewFile,BufRead *.m,*.h set ft=objc
 " Env: LaTeX/HTML
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType tex,html au BufWinEnter * set wrap
-autocmd FileType tex,html nmap <silent> j gj
-autocmd FileType tex,html nmap <silent> k gk
-autocmd FileType tex,html vmap <silent> j gj
-autocmd FileType tex,html vmap <silent> k gk
+autocmd FileType tex,html,txt nmap <silent> j gj
+autocmd FileType tex,html,txt nmap <silent> k gk
+autocmd FileType tex,html,txt vmap <silent> j gj
+autocmd FileType tex,html,txt vmap <silent> k gk
 autocmd FileType tex,html set lbr
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

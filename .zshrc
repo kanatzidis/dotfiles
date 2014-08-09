@@ -47,7 +47,8 @@ function precmd() {
 
 ################################################################### env
 EDITOR=vim
-PATH=~/bin:~/devtools/arcanist/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
+PATH=/usr/local/bin:~/bin:~/devtools/arcanist/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
+#/usr/local/Library/ENV/4.3:
 if [ -z "$HOSTNAME" ]; then
     HOSTNAME=`hostname`
 fi
@@ -58,7 +59,10 @@ fi
 ################################################################### osx
 if [ `uname` = "Darwin" ]; then
     alias ls='ls -G'
+    alias updatedb='sudo /usr/libexec/locate.updatedb'
     export LSCOLORS=dxfxcxdxbxegedabagacad
+    export ARC_PATH=/Users/kanatzidis/Dev/learning/arc3.1/as.scm
+    export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig:$PKG_CONFIG_PATH
     bindkey "\e[3~" delete-char
 elif [ "$TERM" != "dumb" ]; then
     if [ -e "~/.dir_colors" ]; then
@@ -68,6 +72,12 @@ elif [ "$TERM" != "dumb" ]; then
 fi
 
 ################################################################### commands
+alias rm='rm -f'
+alias sbcl='rlwrap sbcl'
+alias arc='rlwrap racket -f $ARC_PATH'
+alias screen='screen -S screen'
+alias ninstall='sudo npm install --save'
+alias ndinstall='sudo npm install --save-dev'
 alias chrun='ps aux | grep'
 alias mysql='/usr/local/mysql/bin/mysql'
 alias mysqld='/usr/local/mysql/bin/mysqld &'
@@ -79,7 +89,6 @@ alias l='ls -a'
 alias df='df -h'
 alias du='du -h'
 alias dus='du -h -s'
-alias rm="rm -i"
 alias grep='grep --color'
 alias cd="pushd >/dev/null"
 alias bd="popd >/dev/null"
@@ -88,6 +97,42 @@ if [ -f ~/.aliases ]; then
 fi
 bindkey '^[v' edit_command_line
 bindkey '^[!' edit_command_output
+source /sw/bin/init.sh #fink
+
+function rpull() {
+  if (($+1)) then
+    if (($+2)) then
+      echo "pulling $1 to $2"
+      rsync -a kanatzidis@192.168.1.2:"$1" "$2"
+      echo
+    else
+      echo "Usage: rpull remote_location local_location"
+    fi
+  else
+    echo "Usage: rpull remote_location local_location"
+  fi
+}
+
+function rpush() {
+  if (($+1)) then
+    if (($+2)) then
+      echo "pushing $1 to $2"
+      rsync -a "$1" kanatzidis@192.168.1.2:"$2"
+      echo
+    else
+      echo "Usage: rpush local_location remote_location"
+    fi
+  else
+    echo "Usage: rpush local_location remote_location"
+  fi
+}
+
+function todo() {
+  #TODO (OH TEH IRONY): restrict to code files
+  echo
+  ack TODO:
+  echo
+}
 
 function fuck() {
   echo
@@ -155,7 +200,7 @@ zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %
 # Completion Styles
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate _expand_alias
 
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
