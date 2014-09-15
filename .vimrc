@@ -162,12 +162,11 @@ au BufNewFile,BufRead *.m,*.h set ft=objc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Env: LaTeX/HTML
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType tex,html au BufWinEnter * set wrap
+autocmd FileType tex,html,txt au BufWinEnter * set wrap
 autocmd FileType tex,html,txt nmap <silent> j gj
 autocmd FileType tex,html,txt nmap <silent> k gk
 autocmd FileType tex,html,txt vmap <silent> j gj
 autocmd FileType tex,html,txt vmap <silent> k gk
-autocmd FileType tex,html set lbr
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Env: Ruby/Rails

@@ -47,9 +47,15 @@ function precmd() {
 
 ################################################################### env
 EDITOR=vim
-source ~/.zsh_private
-NODE_ENV=development
-PATH=/usr/local/bin:~/bin:~/devtools/arcanist/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
+
+if [ -z "$NODE_ENV" ]; then
+  NODE_ENV=development
+fi
+
+if [ -f ~/.zsh_local ]; then
+  source ~/.zsh_local
+fi
+
 #/usr/local/Library/ENV/4.3:
 if [ -z "$HOSTNAME" ]; then
     HOSTNAME=`hostname`
@@ -63,7 +69,6 @@ if [ `uname` = "Darwin" ]; then
     alias ls='ls -G'
     alias updatedb='sudo /usr/libexec/locate.updatedb'
     export LSCOLORS=dxfxcxdxbxegedabagacad
-    export ARC_PATH=/Users/kanatzidis/Dev/learning/arc3.1/as.scm
     export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig:$PKG_CONFIG_PATH
     bindkey "\e[3~" delete-char
 elif [ "$TERM" != "dumb" ]; then
@@ -74,6 +79,11 @@ elif [ "$TERM" != "dumb" ]; then
 fi
 
 ################################################################### commands
+
+########## Aliases
+
+# TODO: Check for non-builtins, or move them to .zsh_local
+
 alias rm='rm -f'
 alias aws='nocorrect aws'
 alias sbcl='rlwrap sbcl'
@@ -82,9 +92,14 @@ alias screen='screen -S screen'
 alias ninstall='sudo npm install --save'
 alias ndinstall='sudo npm install --save-dev'
 alias chrun='ps aux | grep'
-alias mysql='/usr/local/mysql/bin/mysql'
-alias mysqld='/usr/local/mysql/bin/mysqld &'
-alias ack='nocorrect ack'
+
+#### Ack-grep: Depending on how it's installed the name might differ.
+if (( $+commands[ack] )); then
+  alias ack='nocorrect ack'
+elif (( $+commands[ack-grep] )); then
+  alias ack='nocorrect ack-grep'
+fi
+
 alias lal='ls -al'
 alias ll='ls -l'
 alias la='ls -A'
@@ -95,13 +110,20 @@ alias dus='du -h -s'
 alias grep='grep --color'
 alias cd="pushd >/dev/null"
 alias bd="popd >/dev/null"
+
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
+
 bindkey '^[v' edit_command_line
 bindkey '^[!' edit_command_output
-source /sw/bin/init.sh #fink
 
+########## Fink
+if [ -f /sw/bin/init.sh ]; then
+  source /sw/bin/init.sh
+fi
+
+########## Convenience functions
 function rpull() {
   if (($+1)) then
     if (($+2)) then
@@ -139,27 +161,37 @@ function todo() {
 
 function fuck() {
   echo
-  if killall -9 "$2"; then
-    echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
+  if [ -f ~/.flip ]; then
+    if killall -9 "$2"; then
+      echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
+    else
+      echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
+    fi
   else
-    echo " (╯°□°）╯︵$(echo "$2"|~/.flip)"
+    if killall -9 "$2"; then
+      echo " Killed processes: $(echo "$2")."
+    fi
   fi
   echo
 }
 
 ################################################################### utilities
 function freq() {
+  if [ $# = 0 ]; then
+    print Error: You must provide at least one file as an argument.
+  else
     sort $* | uniq -c | sort -rn;
+  fi
 }
 
-# from zsh-users
+# from zsh-users. This is interesting but could be removed or modified to be more useful.
 edit_command_line () {
 	# edit current line in $EDITOR
 	local tmpfile=${TMPPREFIX:-/tmp/zsh}ecl$$
  
 	print -R - "$PREBUFFER$BUFFER" >$tmpfile
 	exec </dev/tty
-	jed $tmpfile
+	vim $tmpfile
 	zle kill-buffer
 	BUFFER=${"$(<$tmpfile)"/$PREBUFFER/}
 	CURSOR=$#BUFFER
@@ -179,6 +211,8 @@ edit_command_output () {
 zle -N edit_command_output
 
 ################################################################### completion
+
+# TODO: Document this stuff
 
 autoload -U compinit
 compinit
@@ -272,10 +306,3 @@ function _get_tags {
 }
 compctl -x 'C[-1,-t]' -K _get_tags -- vim
 #end vim tags
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh # This loads NVM
