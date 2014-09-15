@@ -1,5 +1,6 @@
 startup_message off
-defscrollback 2048
+defscrollback 5000
+termcapinfo $TERM ti@:te@
 hardstatus on
 hardstatus alwayslastline
 hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "

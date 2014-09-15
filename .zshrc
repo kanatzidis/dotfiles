@@ -47,6 +47,8 @@ function precmd() {
 
 ################################################################### env
 EDITOR=vim
+source ~/.zsh_private
+NODE_ENV=development
 PATH=/usr/local/bin:~/bin:~/devtools/arcanist/bin:/opt/local/bin:/Applications/Postgres.app/Contents/MacOS/bin:/usr/local/texlive/2012/bin/universal-darwin:$PATH
 #/usr/local/Library/ENV/4.3:
 if [ -z "$HOSTNAME" ]; then
@@ -73,6 +75,7 @@ fi
 
 ################################################################### commands
 alias rm='rm -f'
+alias aws='nocorrect aws'
 alias sbcl='rlwrap sbcl'
 alias arc='rlwrap racket -f $ARC_PATH'
 alias screen='screen -S screen'
