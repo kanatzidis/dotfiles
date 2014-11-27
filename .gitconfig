@@ -1,2 +1,7 @@
 [include]
   path = ~/.gitextras
+[credential]
+	helper = osxkeychain
+[user]
+	name = Gregori Kanatzidis
+	email = kanatzidisg@gmail.com

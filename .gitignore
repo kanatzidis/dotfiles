@@ -10,6 +10,7 @@
 !.vim/*/*/*/*
 !.gitconfig
 !.gitignore
+!.gitignore_global
 !.gitextras
 !.flip
 !.inputrc

@@ -19,6 +19,7 @@ nmap <leader>w :w!<cr>
 
 " Always use undofiles.
 set undofile
+set undodir=~/.undofiles
 
 " When vimrc is edited, reload it.
 " I don't think this works.
@@ -187,3 +188,6 @@ command Nothreshold let &colorcolumn=0
 " Set soft line navigation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
+
+
+execute pathogen#infect()
