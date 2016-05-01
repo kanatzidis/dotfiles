@@ -56,6 +56,10 @@ if [ -f ~/.zsh_local ]; then
   source ~/.zsh_local
 fi
 
+if [[ !(-d ~/.undofiles) ]]; then
+  mkdir ~/.undofiles
+fi
+
 #/usr/local/Library/ENV/4.3:
 if [ -z "$HOSTNAME" ]; then
     HOSTNAME=`hostname`
