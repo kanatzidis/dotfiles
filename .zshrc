@@ -56,7 +56,8 @@ if [ -f ~/.zsh_local ]; then
   source ~/.zsh_local
 fi
 
-if [[ !(-d ~/.undofiles) ]]; then
+if [ -d ~/.undofiles ]; then
+else
   mkdir ~/.undofiles
 fi
 
