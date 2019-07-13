@@ -15,7 +15,7 @@ filetype indent on
 set autoread
 
 " Fast saving
-nmap <leader>w :w!<cr>
+" nmap <leader>w :w!<cr>
 
 " Always use undofiles.
 set undofile
@@ -23,7 +23,7 @@ set undodir=~/.undofiles
 
 " When vimrc is edited, reload it.
 " I don't think this works.
-autocmd! bufwritepost vimrc source ~/.vimrc
+" autocmd! BufWritePost .vimrc source ~/.vimrc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
@@ -115,38 +115,11 @@ noremap <tab> :prev <Enter>
 " Custom highlighting
 so ~/.vim/plugin/highlights.vim
 Highlight 4 TODO
-
-" Load all help docs
-helptags ~/.vim/doc
+hi Comment guifg=#EEEEEE ctermfg=White
 
 " Super fancy status line
 " http://www.linux.com/archive/feature/120126
 :set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LINES=%L] 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins For Make IDE 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VTreeExplorer
-" Open with :VTreeExplore /path/
-let treeExplDirSort = 1
-let treeExplVertical = 1
-let treeExplWinSize = 40
-command! -n=? -complete=dir JTree :VSTreeExplore
-" Taglist and easytags!
-" README note: Make sure to install exuberant ctags on your system: http://vim-taglist.sourceforge.net/faq.html
-let Tlist_Ctags_Cmd='/usr/bin/local/ctags'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Env: PHP
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" ----- Dictionary completion for PHP -----
-" The completion dictionary is provided by Rasmus:
-" http://lerdorf.com/funclist.txt
-
-" set "make" command when editing php files
-set makeprg=php\ -l\ %
-set errorformat=%m\ in\ %f\ on\ line\ %l
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Env: Assembly
@@ -170,24 +143,17 @@ autocmd FileType tex,html,txt vmap <silent> j gj
 autocmd FileType tex,html,txt vmap <silent> k gk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Env: Ruby/Rails
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set nocompatible
-filetype plugin indent on
-autocmd FileType ruby set expandtab
-autocmd FileType ruby set tabstop=2
-autocmd FileType ruby set shiftwidth=2
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Display 80 character threshold
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command Threshold let &colorcolumn=join(range(81,999),",") | highlight ColorColumn ctermbg=124 guibg=LightRed
-command Nothreshold let &colorcolumn=0
+"command Threshold let &colorcolumn=join(range(81,999),",") | highlight ColorColumn ctermbg=124 guibg=LightRed
+"command Nothreshold let &colorcolumn=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set soft line navigation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
+"command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
 
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Instantiate Pathogen
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute pathogen#infect()
