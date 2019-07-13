@@ -115,6 +115,7 @@ noremap <tab> :prev <Enter>
 " Custom highlighting
 so ~/.vim/plugin/highlights.vim
 Highlight 4 TODO
+hi Comment guifg=#EEEEEE ctermfg=White
 
 " Super fancy status line
 " http://www.linux.com/archive/feature/120126
