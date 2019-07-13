@@ -116,9 +116,6 @@ noremap <tab> :prev <Enter>
 so ~/.vim/plugin/highlights.vim
 Highlight 4 TODO
 
-" Load all help docs
-helptags ~/.vim/doc
-
 " Super fancy status line
 " http://www.linux.com/archive/feature/120126
 :set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LINES=%L] 
@@ -188,6 +185,3 @@ command Nothreshold let &colorcolumn=0
 " Set soft line navigation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
-
-
-execute pathogen#infect()
