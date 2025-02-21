@@ -117,6 +117,7 @@ function! RunTests()
     endif
 
     if command != ""
+        write
         execute "!" . command
     endif
 endfunction
