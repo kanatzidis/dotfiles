@@ -35,6 +35,7 @@ set ruler "Always show current position
 set cmdheight=2 "The commandbar height
 
 syntax enable " Enable syntax highlighting
+set re=0
 set number " Display line numbers
 set nowrap " turn off text wrapping
 
@@ -101,6 +102,65 @@ set backspace=2
 " Easier escape key
 ino jj <esc>
 
+" Run tests
+function! RunTests()
+    let filetype = &filetype
+    if filetype ==# "rust"
+        let function_name = FindRustTestFunctionName()
+        if function_name != ""
+            let command = "cargo test " . function_name . " -- --nocapture"
+        else
+            let command = "cargo test -- --nocapture"
+        endif
+    else
+        let command = ""
+    endif
+
+    if command != ""
+        execute "!" . command
+    endif
+endfunction
+
+function! FindRustTestFunctionName()
+    let lnum = line('.')  " Start at the cursor position
+    let function_name = ""
+
+    " Step 1: Find the nearest function declaration first
+    while lnum > 0
+        let line_text = getline(lnum)
+
+        " Match Rust function declaration
+        if match(line_text, '^\s*fn\s\+\(\k\+\)') >= 0
+            let function_name = matchstr(line_text, '^\s*fn\s\+\zs\k\+')
+            break
+        endif
+
+        let lnum -= 1  " Move to the previous line
+    endwhile
+
+    " If no function was found, return empty
+    if function_name == ""
+        return ""
+    endif
+
+    " Step 2: Continue searching upwards for 'mod tests {'
+    while lnum > 0
+        let line_text = getline(lnum)
+
+        " If we find 'mod tests {', return the function name
+        if match(line_text, '^\s*mod tests\s*{') >= 0
+            return function_name
+        endif
+
+        let lnum -= 1  " Move to the previous line
+    endwhile
+
+    " If we didn't find 'mod tests {', return empty
+    return ""
+endfunction
+
+nnoremap <C-k> :call RunTests()<CR>
+
 "color peachpuff
 
 " Buffer explorer
@@ -116,6 +176,16 @@ noremap <tab> :prev <Enter>
 so ~/.vim/plugin/highlights.vim
 Highlight 4 TODO
 hi Comment guifg=#EEEEEE ctermfg=White
+augroup comment_textwidth
+    autocmd!
+    autocmd TextChanged,TextChangedI * :call AdjustTextWidth()
+augroup END
+
+function! AdjustTextWidth()
+    let syn_element = synIDattr(synID(line("."), col(".") - 1, 1), "name")
+    let &textwidth = syn_element =~? 'comment' ? 72 : 79
+    echo "tw = " . &textwidth
+endfunction
 
 " Super fancy status line
 " http://www.linux.com/archive/feature/120126
