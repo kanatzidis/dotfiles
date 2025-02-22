@@ -107,8 +107,10 @@ function! RunTests()
     let filetype = &filetype
     if filetype ==# "rust"
         let function_name = FindRustTestFunctionName()
+        let filename = expand('%:t:r')
+        let test_invoc_name = filename . "::tests::" . function_name
         if function_name != ""
-            let command = "cargo test " . function_name . " -- --nocapture"
+            let command = "cargo test " . test_invoc_name . " -- --nocapture"
         else
             let command = "cargo test -- --nocapture"
         endif
