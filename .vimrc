@@ -89,32 +89,18 @@ function! AdjustTextWidth()
     let &textwidth = syn_element =~? 'comment' ? 72 : 79
 endfunction
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Env: Objective-C
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufRead *.m,*.h set ft=objc
+" tab completion in insert mode
+inoremap <Tab> <C-N>
+inoremap <S-Tab> <C-P>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Env: LaTeX/HTML
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType tex,html,txt au BufWinEnter * set wrap
-autocmd FileType tex,html,txt nmap <silent> j gj
-autocmd FileType tex,html,txt nmap <silent> k gk
-autocmd FileType tex,html,txt vmap <silent> j gj
-autocmd FileType tex,html,txt vmap <silent> k gk
+set colorcolumn=81
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Display 80 character threshold
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"command Threshold let &colorcolumn=join(range(81,999),",") | highlight ColorColumn ctermbg=124 guibg=LightRed
-"command Nothreshold let &colorcolumn=0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set soft line navigation
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"command Softnav nmap <silent> j gj| nmap <silent> k gk| vmap <silent> j gj| vmap <silent> k gk
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Instantiate Pathogen
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute pathogen#infect()
+" prose filetypes: wrap lines and navigate by visual lines
+augroup prose
+    autocmd!
+    autocmd FileType tex,html,txt setlocal wrap
+    autocmd FileType tex,html,txt nmap <buffer> <silent> j gj
+    autocmd FileType tex,html,txt nmap <buffer> <silent> k gk
+    autocmd FileType tex,html,txt vmap <buffer> <silent> j gj
+    autocmd FileType tex,html,txt vmap <buffer> <silent> k gk
+augroup END
