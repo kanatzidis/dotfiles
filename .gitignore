@@ -1,13 +1,9 @@
 *
 !.screenrc
 !.vimrc
-!.bashrc
 !.zshrc
 !.vim/
-!.vim/*
-!.vim/*/*
-!.vim/*/*/*
-!.vim/*/*/*/*
+!.vim/**
 !.gitconfig
 !.gitignore
 !.gitignore_global
