@@ -28,6 +28,11 @@ function precmd() {
 ################################################################### env
 export EDITOR=vim
 
+# initialize completion system before sourcing local config,
+# which may register completions via compdef
+autoload -U compinit
+compinit
+
 if [ -f ~/.zsh_local ]; then
   source ~/.zsh_local
 fi
@@ -91,9 +96,6 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 
 ################################################################### completion
-
-autoload -U compinit
-compinit
 
 # keybindings for completion and navigation
 bindkey "^?" backward-delete-char    # backspace past insert point in vi mode
