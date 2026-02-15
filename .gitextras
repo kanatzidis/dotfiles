@@ -10,16 +10,9 @@
   log = log --decorate
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --all  --graph --decorate --pretty=oneline --abbrev-commit
-  svnci = svn dcommit
-  svnup = svn fetch
-  svnst = log trunk..
-  #br = !sh -c 'git branch --color $* | grep -v " z-"' -
   br = branch
   diffn = diff --no-ext-diff
-  resolve = !git-resolve
-  wtf = !git-wtf
   delwf = clean  -d  -fx ""
-  #for phabricator:
   amend = commit -a --amend -C HEAD
   amend-man = commit --amend -C HEAD
 [color]
@@ -30,9 +23,8 @@
 [merge]
   tool = diff
 [core]
-  whitespace = -trailing-space    
   autocrlf = input
-  editor = /usr/bin/vim
+  editor = vim
   excludesfile = ~/.gitignore_global
 [push]
   default = current
