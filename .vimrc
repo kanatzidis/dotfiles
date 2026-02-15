@@ -35,7 +35,9 @@ set mat=2                    " bracket flash duration (tenths of a second)
 " silence
 set noerrorbells
 set novisualbell
-set t_vb=
+if !has('nvim')
+    set t_vb=
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files and backups
