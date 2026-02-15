@@ -18,6 +18,9 @@ set autoread
 " nmap <leader>w :w!<cr>
 
 " Always use undofiles.
+if !isdirectory(expand('~/.undofiles'))
+    call mkdir(expand('~/.undofiles'), 'p')
+endif
 set undofile
 set undodir=~/.undofiles
 
