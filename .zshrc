@@ -6,6 +6,7 @@ unsetopt BG_NICE            # don't deprioritize background jobs
 setopt CORRECT              # offer corrections for mistyped commands
 setopt EXTENDED_HISTORY     # store timestamps in history
 setopt INC_APPEND_HISTORY   # write to history file immediately, not on exit
+setopt interactivecomments
 bindkey -v                  # vi keybindings
 
 ################################################################### prompt
