@@ -69,6 +69,7 @@ alias df='df -h'
 alias du='du -h'
 alias dus='du -h -s'
 alias grep='grep --color'
+alias cd="pushd >/dev/null"
 
 if [ -f ~/.aliases ]; then
     source ~/.aliases
